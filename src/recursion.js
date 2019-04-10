@@ -6,12 +6,32 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
-var factorial = function(n) {
+var factorial = function(n) { //factorial(4)
+    //termination condition: condition for recursion to stop (edge cases)
+  
+    //base case: condition for recursion to stop (don't want to recurse anymore)
+
+    //the actual recursion (won't call if 1 and 2 are true)
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
+
+[6]
+
 var sum = function(array) {
+    //termination condition:
+        if (array.length === 0) {
+            return 0;
+        }
+    //base case: 
+        //stop when the array.length === 1
+        if (array.length === 1) {
+            return array[0]; 
+        }
+    //the actual recursion
+        //take array[0], add array[0 + 1]
+        return array[0] + sum(array.slice(1))
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -54,7 +74,24 @@ var reverse = function(string) {
 };
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) {
+var palindrome = function(string) { //racecar  //palindrome(raceecar)
+    //termination condition
+        //if input is a number
+    //base case
+        //when to stop recursing
+        if (string.length === 1 || (string.length === 2 && string[0] === string[string.length - 1])) {
+            return true;
+        }
+        if (string[0] !== string[string.length - 1]) {
+            return false;
+        }
+    //recursion
+        if (string[0] === string[string.length - 1]) {
+            return palindrome(string.slice(1, string.length - 1)) //slice includes beginning index, not the end
+        }
+    //return true or false
+
+
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -132,10 +169,33 @@ var countKeysInObj = function(obj, key) {
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
-// var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
+// var obj = {    'e':{'x':'y', 'a': 'b'},   't':{'r':{'e':'r'},     'p':{'y':'r'}},    'y':'e'   };
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+    //input: an object and a value (string) 
+    //output: the NUMBER of times a value occurs in the obj
+    //constraints: 
+    var counter = 0;
+    //edge: termination condition
+    if (typeof value !== 'string') {
+        return;
+    }
+    //base case:
+
+
+    //recursion:
+    //recurse through each key-value pair in the object
+        for (var key in obj) {
+            if (obj[key] === value) {
+                counter++;
+            } else if (typeof obj[key] === 'object') {
+                counter += countValuesInObj(obj[key], value);
+            }
+        } 
+        return counter;
+
+
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
