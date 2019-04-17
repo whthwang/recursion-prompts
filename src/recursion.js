@@ -20,27 +20,25 @@ var factorial = function(n) { //factorial(4)
 [6]
 
 var sum = function(array) {
-    //termination condition:
-        if (array.length === 0) {
-            return 0;
-        }
-    //base case: 
-        //stop when the array.length === 1
-        if (array.length === 1) {
-            return array[0]; 
-        }
-    //the actual recursion
-        //take array[0], add array[0 + 1]
-        return array[0] + sum(array.slice(1))
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+    let accumulator = 0;
+    for (let i in array) {
+        if (!Array.isArray(array[i])) {
+            accumulator += array[i]  //first loop accum. is 1
+        } else {
+            accumulator += arraySum(array[i]); //5
+        }
+    }
+    return accumulator;
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+
 };
 
 // 5. Sum all integers below a given integer.
@@ -129,11 +127,59 @@ var compareStr = function(str1, str2) {
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str) {
+var createArray = function(str) { //str = 'hey'
+    let answer = [];
+
+    //base case
+    //when str.length is 1, calling recursion func on str will return ''
+    if (str.length === 1) {
+        answer.push(str[0]);
+        return answer;
+    } else {
+        //when str length is not 1
+        answer.push(str[0]);
+        return answer.concat(createArray(str.slice(1)));
+        
+    }
+
+
+
+    // if (str.length > 1) {
+    //     answer.push(str[0]);
+    //     answer.concat(createArray(str.slice(1)));
+    // } else {
+    //     answer.push(str[0]);
+    //     return answer;
+    // }
+    // console.log(answer);
+    // return answer;
+
+    //working implementation
+    //var createArray = function(str, arr = []) {
+    // if (str !== '') {
+    //     arr.push(str[0]); //['h','e','y']
+    //     return createArray(str.slice(1), arr);
+    // } else {
+    //     return arr;
+    // }
+    //working implementation
+    // let answer = [];
+    // const helperFunc = function (string) {
+    //     if (string !== '') {
+    //         answer.push(string[0]);
+    //         return helperFunc(string.slice(1));
+    //     } else {
+    //         return answer;
+    //     }
+    // }
+    // return helperFunc(str);
+    //working implemenetation
+
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
+
 };
 
 // 18. Create a new array with a given value and length.
